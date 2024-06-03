@@ -1,0 +1,45 @@
+* {
+    font-family: sans-serif;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    margin-top: 200px;
+    padding: 0;
+    background-color: white;
+    overflow-x: hidden; /* Restricts horizontal scrollability */
+    overflow-y: auto; /* Allows vertical scrollability */
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    padding: 33px 10%;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    z-index: 1000;
+}
+
+.navigationbar {
+    display: flex;
+    align-items: center;
+}
+
+.navigationbar a {
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    margin-left: 20px; /* Add margin to the left of the text */
+}
+
+.logo {
+    width: 200px;
+}
