@@ -6,13 +6,21 @@
     padding: 0;
 }
 
+html, body {
+    height: 100%; /* Ensure the html and body elements take up full height */
+}
+
 body {
-    height: 100%;
     margin-top: 200px;
     padding: 0;
     background-color: white;
     overflow-x: hidden; /* Restricts horizontal scrollability */
     overflow-y: auto; /* Allows vertical scrollability */
+    text-align: center;
+    background-image: url('photos/backgroundimage2.jpg'); /* Set the background image */
+    background-size: cover; /* Make the image cover the entire background */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed; /* Ensure the background image is fixed and doesn't scroll */
 }
 
 .header {
@@ -20,7 +28,9 @@ body {
     top: 0;
     left: 0;
     width: 100%;
+    background: rgba(0, 12, 1, 0.589);
     background-color: black;
+    backdrop-filter: blur(5px);
     padding: 33px 10%;
     display: flex;
     justify-content: center; /* Center the content horizontally */
@@ -42,4 +52,44 @@ body {
 
 .logo {
     width: 200px;
+}
+
+input[type="number"] {
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: black; 
+    color: white; 
+    cursor: pointer; 
+}
+
+button:hover {
+    background-color: gray; 
+}
+
+.scoreboard {
+    width: 100px;
+    height: 50px;
+    line-height: 50px; /* Center the text vertically */
+    font-size: 24px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 20px auto;
 }
