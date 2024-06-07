@@ -264,12 +264,17 @@ function updateMap(newMap) {
                 img.src = 'photos/pacman.jpg';
                 break;
             case '^.':
+                img.src = 'photos/ghost.jpg';
+                break;
+            case '^@':
+                img.src = 'photos/ghost.jpg';
+                break;  
             case '^':
                 img.src = 'photos/ghost.jpg';
                 break;
             case '@':
                 img.src = 'photos/fruit.jpg';
-                break;
+                break;  
             case '.':
                 img.src = 'photos/pellet.jpg';
                 break;
