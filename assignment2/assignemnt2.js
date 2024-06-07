@@ -1,279 +1,297 @@
-
-var map=[];
-var Cdir=0;
-var Gdir=0;
-var Clocation=0;
-var Glocation=0;
-var size=0;
-var finish=99;
-var power=0;
-var score=0;
+var map = [];
+var Cdir = 0;
+var Gdir = 0;
+var Clocation = 0;
+var Glocation = 0;
+var size = 0;
+var finish = 99;
+var power = 0;
+var score = 0;
 
 document.addEventListener('keydown', control);
 
-function makeMap(){
-    score=0;
+function makeMap() {
+    score = 0;
     size = document.getElementById("randomN").value;
     randomN(size);   
 }
 
-function randomN(size){
-    map=[];
-    if (size==''){
+function randomN(size) {
+    map = [];
+    if (size == '') {
         alert("Please enter a map size");
         return false;
-    };
-    if(size<3){
+    }
+    if (size < 3) {
         alert("please enter a number larger than 3");
         return false;
-    };
+    }
 
-    for(i=0;i<size;i++){
-        if(i==Math.floor(size/3)){
+    for (i = 0; i < size; i++) {
+        if (i == Math.floor(size / 3)) {
             map.push("C");
-            Clocation=i;
-        }else if(i==Math.floor(size/2)){
+            Clocation = i;
+        } else if (i == Math.floor(size / 2)) {
             map.push("@");
-        }else if(i==size-1){
+        } else if (i == size - 1) {
             map.push("^.");
-            Glocation=i;
-        }else{
+            Glocation = i;
+        } else {
             map.push(".");
         }
     }
-    
+
     updateMap(map);
-    
 }
 
-function init(){
-    Cdir=0;
-    Gdir=0;
-    Clocation=0;
-    Glocation=0;
-    finish=0;
-    power=0;
+function init() {
+    Cdir = 0;
+    Gdir = 0;
+    Clocation = 0;
+    Glocation = 0;
+    finish = 0;
+    power = 0;
     randomN(size);
 }
 
-function start(){
+function start() {
     init();
     run();
 }
 
-function run(){
-    
+function run() {
     updateScore();
-    if(finish==1){
-        updateMap("You Lose!");
-        
-    }else if(finish==2){
+    if (finish == 1) {
+        updateMap(["You Lose!"]);
+    } else if (finish == 2) {
         alert("You Win! Next Level");
         setTimeout(1000);
-        size=size*2;
+        size = size * 2;
         randomN(size);
-    }else if(remainPellets()==false){
+    } else if (remainPellets() == false) {
         alert("You Win! Next Level");
-        size=size*2;
+        size = size * 2;
         randomN(size);
-    }else{
+    } else {
         Cmove();
-        if(finish==0){
+        if (finish == 0) {
             moveGhost();
         }
-        setTimeout(run,500);
+        setTimeout(run, 500);
     }
 }
 
-function moveGhost(){
-    // decide Ghost dir
-    for (i=0;i<map.length;i++){
-        elem=map[i];
-        if(elem=="^."||elem=="^"){
-            Gdir=1;
+function moveGhost() {
+    for (i = 0; i < map.length; i++) {
+        var elem = map[i];
+        if (elem == "^." || elem == "^") {
+            Gdir = 1;
             break;
-        }else if(elem=="."||elem=="@"||elem==" "){
-            
-        }else{
-            Gdir=0;
+        } else if (elem == "." || elem == "@" || elem == " ") {
+            // Do nothing
+        } else {
+            Gdir = 0;
             break;
         }
     }
-    if(Gdir==1){
+    if (Gdir == 1) {
         gohostRight();
-    }else{
+    } else {
         gohostleft();
     }
 }
 
-function gohostleft(){
-    if(map[Glocation]=="^."){
-        map[Glocation]=".";
-    }else if(map[Glocation]=="^"){
-        map[Glocation]=" ";
-    }else{
-        map[Glocation]="@";
+function gohostleft() {
+    if (map[Glocation] == "^.") {
+        map[Glocation] = ".";
+    } else if (map[Glocation] == "^") {
+        map[Glocation] = " ";
+    } else {
+        map[Glocation] = "@";
     }
-    nextLocation=Glocation-1;
-    if(nextLocation<=0){
-        nextLocation=size-1;
+    var nextLocation = Glocation - 1;
+    if (nextLocation <= 0) {
+        nextLocation = size - 1;
     }
-    switch (map[nextLocation]){
+    switch (map[nextLocation]) {
         case ".":
-            map[nextLocation]="^.";
+            map[nextLocation] = "^.";
             break;
         case " ":
-            map[nextLocation]="^";
+            map[nextLocation] = "^";
             break;
         case "@":
-            map[nextLocation]="^@";
+            map[nextLocation] = "^@";
             break;
         default:
-            map[nextLocation]="^";
-            finish=1; 
-               
+            map[nextLocation] = "^";
+            finish = 1; 
     }
-    Glocation=nextLocation;
-    
+    Glocation = nextLocation;
+
     updateMap(map);
 }
 
-function gohostRight(){
-    if(map[Glocation]=="^."){
-        map[Glocation]=".";
-    }else if(map[Glocation]=="^"){
-        map[Glocation]=" ";
-    }else{
-        map[Glocation]="@";
+function gohostRight() {
+    if (map[Glocation] == "^.") {
+        map[Glocation] = ".";
+    } else if (map[Glocation] == "^") {
+        map[Glocation] = " ";
+    } else {
+        map[Glocation] = "@";
     }
-    nextLocation=Glocation+1;
-    if(nextLocation>=size){
-        nextLocation=0;
+    var nextLocation = Glocation + 1;
+    if (nextLocation >= size) {
+        nextLocation = 0;
     }
-    switch (map[nextLocation]){
+    switch (map[nextLocation]) {
         case ".":
-            map[nextLocation]="^.";
+            map[nextLocation] = "^.";
             break;
         case " ":
-            map[nextLocation]="^";
+            map[nextLocation] = "^";
             break;
         case "@":
-            map[nextLocation]="^@";
+            map[nextLocation] = "^@";
             break;
         default:
-            map[nextLocation]="^";
-            finish=1;
-               
+            map[nextLocation] = "^";
+            finish = 1;
     }
-    Glocation=nextLocation;
-    
+    Glocation = nextLocation;
+
     updateMap(map);
 }
 
-function Cmove(){
-    if(Cdir==1){
+function Cmove() {
+    if (Cdir == 1) {
         cRight();
-    }else{
+    } else {
         cLeft();
     }
 }
 
-function cRight(){
-    map[Clocation]=" ";
-    nextLocation=Clocation+1
-    if(nextLocation>=size){
-        nextLocation=0;
+function cRight() {
+    map[Clocation] = " ";
+    var nextLocation = Clocation + 1;
+    if (nextLocation >= size) {
+        nextLocation = 0;
     }
-    switch (map[nextLocation]){
+    switch (map[nextLocation]) {
         case ".":
             score++;
-            map[nextLocation]="C.";
+            map[nextLocation] = "C.";
             break;
         case " ":
-            map[nextLocation]="C";
+            map[nextLocation] = "C";
             break;
         case "@":
-            score=score+10;
-            map[nextLocation]="C@";
-            power=1;
+            score += 10;
+            map[nextLocation] = "C@";
+            power = 1;
             break;
         default:
-            if(power==0){
-                map[nextLocation]="^";
-                finish=1;
-                
+            if (power == 0) {
+                map[nextLocation] = "^";
+                finish = 1;
             }
-            if(power==1){
-                score=score+20;
-                map[nextLocation]="C";
-                finish=2;
-                
-            }          
-    }
-    Clocation=nextLocation;
-    updateMap(map);
-    
-}
-
-function cLeft(){
-    map[Clocation]=" ";
-    nextLocation=Clocation-1
-    if(nextLocation<0){
-        nextLocation=size-1;
-    }
-   
-    switch (map[nextLocation]){
-        case ".":
-            score++;
-            map[nextLocation]="C.";
-            break;
-        case " ":
-            map[nextLocation]="C";
-            break;
-        case "@":
-            score=score+10;
-            map[nextLocation]="C@";
-            power=1;
-        default:
-            if(power==0){
-                map[nextLocation]="^";
-                finish=1;
-                
+            if (power == 1) {
+                score += 20;
+                map[nextLocation] = "C";
+                finish = 2;
             }
-            if(power==1){
-                score=score+20;
-                map[nextLocation]="C";
-                finish=2;
-                
-            }          
     }
-    Clocation=nextLocation;
+    Clocation = nextLocation;
     updateMap(map);
 }
 
-function right(){
-    Cdir=1;
-}
-function left(){
-    Cdir=0;
+function cLeft() {
+    map[Clocation] = " ";
+    var nextLocation = Clocation - 1;
+    if (nextLocation < 0) {
+        nextLocation = size - 1;
+    }
+    switch (map[nextLocation]) {
+        case ".":
+            score++;
+            map[nextLocation] = "C.";
+            break;
+        case " ":
+            map[nextLocation] = "C";
+            break;
+        case "@":
+            score += 10;
+            map[nextLocation] = "C@";
+            power = 1;
+        default:
+            if (power == 0) {
+                map[nextLocation] = "^";
+                finish = 1;
+            }
+            if (power == 1) {
+                score += 20;
+                map[nextLocation] = "C";
+                finish = 2;
+            }
+    }
+    Clocation = nextLocation;
+    updateMap(map);
 }
 
-function updateMap(newMap){
-    printedMap=document.getElementById("map");
-    printedMap.textContent=newMap;
+function right() {
+    Cdir = 1;
 }
 
-function updateScore(){
-    printedMap=document.getElementById("score");
-    printedMap.textContent=score;
+function left() {
+    Cdir = 0;
 }
 
-function remainPellets(){
-    result=false;
-    
-    for(i=0;i<map.length;i++){
-        if (map[i]=="."){
-            result=true;
+function updateMap(newMap) {
+    var printedMap = document.getElementById("map");
+    printedMap.innerHTML = ''; // Clear the previous map
+
+    newMap.forEach(function(cell) {
+        var cellDiv = document.createElement('div');
+        cellDiv.className = 'game-cell';
+
+        var img = document.createElement('img');
+
+        switch(cell) {
+            case 'C':
+                img.src = 'photos/pacman.jpg';
+                break;
+            case 'C.':
+                img.src = 'photos/pacman.jpg';
+                break;
+            case '^.':
+            case '^':
+                img.src = 'photos/ghost.jpg';
+                break;
+            case '@':
+                img.src = 'photos/fruit.jpg';
+                break;
+            case '.':
+                img.src = 'photos/pellet.jpg';
+                break;
+            default:
+                img.src = 'photos/blank.jpg'; // empty cell
+        }
+
+        cellDiv.appendChild(img);
+        printedMap.appendChild(cellDiv);
+    });
+}
+
+function updateScore() {
+    var scoreDiv = document.getElementById("score");
+    scoreDiv.textContent = "Score: " + score;
+}
+
+function remainPellets() {
+    var result = false;
+    for (i = 0; i < map.length; i++) {
+        if (map[i] == ".") {
+            result = true;
             break;
         }
     }
@@ -281,7 +299,7 @@ function remainPellets(){
 }
 
 function control(event) {
-    switch(event.key) {
+    switch (event.key) {
         case 'ArrowLeft':
             left();
             break;
