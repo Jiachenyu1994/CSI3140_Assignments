@@ -84,7 +84,7 @@ function run() {
 function moveGhost() {
     for (i = 0; i < map.length; i++) {
         var elem = map[i];
-        if (elem == "^." || elem == "^") {
+        if (elem == "^." || elem == "^"||elem == "^@") {
             Gdir = 1;
             break;
         } else if (elem == "." || elem == "@" || elem == " ") {
@@ -94,11 +94,20 @@ function moveGhost() {
             break;
         }
     }
-    if (Gdir == 1) {
-        gohostRight();
-    } else {
-        gohostleft();
+    if(power==0){
+        if (Gdir == 1) {
+            gohostRight();
+        } else {
+            gohostleft();
+        }
+    }else{
+        if (Gdir == 0) {
+            gohostRight();
+        } else {
+            gohostleft();
+        }
     }
+    
 }
 
 function gohostleft() {
@@ -187,7 +196,7 @@ function cRight() {
             break;
         case "@":
             score += 10;
-            map[nextLocation] = "C@";
+            map[nextLocation] = "C";
             power = 1;
             break;
         default:
@@ -221,7 +230,7 @@ function cLeft() {
             break;
         case "@":
             score += 10;
-            map[nextLocation] = "C@";
+            map[nextLocation] = "C";
             power = 1;
         default:
             if (power == 0) {
@@ -278,6 +287,9 @@ function updateMap(newMap) {
             case '.':
                 img.src = 'photos/pellet.jpg';
                 break;
+            case "You Lose!":
+                img.src='photos/lose.jpg';
+                break;
             default:
                 img.src = 'photos/blank.jpg'; // empty cell
         }
@@ -295,7 +307,7 @@ function updateScore() {
 function remainPellets() {
     var result = false;
     for (i = 0; i < map.length; i++) {
-        if (map[i] == ".") {
+        if (map[i] == "."||map[i] == "^.") {
             result = true;
             break;
         }
