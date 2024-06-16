@@ -5,8 +5,8 @@ A 1-D version of the classic Pac-Man Arcade game where the goal is to collect al
 
 This is the inital game state
 
-![inital game state](.docs/images/initalgamestateUI.png)
+![inital game state](docs/images/initalgamestateUI.png)
 
 This is after setting a size of the map board 
 
-![inital game state](.docs/images/startgameUI.png)
+![inital game state](docs/images/startgameUI.png)
