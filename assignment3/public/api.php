@@ -22,15 +22,46 @@ if(!isset($_SESSION["game"])){
 
 
 switch ($action) {
+    // refresh the game
+    case "reset":
+        session_destroy();
+        exit();
+    // init game map
     case "makeMap":
         $size=isset($_GET["size"]) ? $_GET["size"] : "";
         if($size<3 || $size==""){
             echo json_encode(["error"=>"Map size need to be a integer larger than 3"]);
         }else{
             $reponse=["map" => $game->makeMap($size)];
+            $_SESSION["game"]=serialize($game);
             echo json_encode($reponse);
         }
+        break;
+    // run the game
+    case "runGame":
+        $status=$game->run();
+        $score=$game->getScore();
+        $map=$game->getMap();
+        $reponse = [
+            "status" => $status,
+            "score" => $score,
+            "map" => $map
+        ];
+        echo json_encode($reponse);
         
+        $_SESSION["game"]=serialize($game);
+        break;
+    case "nextLevel":
+        $game->nextLevel();
+        $_SESSION["game"]=serialize($game);
+        break;
+    case "goRight":
+        $game->pGoRight();
+        $_SESSION["game"]=serialize($game);
+        break;
+    case "goLeft":
+        $game->pGoLeft();
+        $_SESSION["game"]=serialize($game);
         break;
     default:
         echo json_encode(["error"=>"invalid action"]);

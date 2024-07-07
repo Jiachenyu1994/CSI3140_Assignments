@@ -24,11 +24,9 @@
 
     <h1>Initialize your 1D Paku Paku Game</h1>
     <br>
-    <form id="sizeForm">
-        <input type="number" id="size" placeholder="Enter the map size">
-        <br>
-        <button id="make-Map">Make Game Map</button>
-    </form>
+    <input type="number" id="size" placeholder="Enter the map size">
+    <br>
+    <button id="make-Map">Make Game Map</button>
     <br>
     <br>
     <h2>Scoreboard:</h2>
@@ -39,9 +37,9 @@
     <br>
     <P id="map" class = "board"></P>
     <br>
-    <button onclick="start()">Start the game</button>
-    <button onclick="left()">Go left</button>
-    <button onclick="right()">Go right</button>
+    <button id="start">Start the game</button>
+    <button id="left">Go left</button>
+    <button id="right">Go right</button>
 
     
     <script src="assignemnt3.js"></script>
