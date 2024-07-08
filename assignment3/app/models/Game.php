@@ -132,16 +132,18 @@ class Game{
                     $this->status=2;
                 }
                 if ($power == true) {
-                    $this->score = 20;
+                    $this->score += 20;
                     $this->map[$pNext] = "C";
                     $this->status=1;
                 }
         }
 
     }
-    function nextLevel(){
+    function nextLevel($size){
+        $this->size=$size;
         $this->status = 0;
         $this->pacman->set_power(false);
+        $this->makeMap($size);
     }
     function getMap(){
         return $this->map;

@@ -1,8 +1,15 @@
 var size;
 
+var userId;
+
 window.onload = function() {
     reset();
+    updateScoreBoard()
+    userId = prompt("Please enter your name:", "Your Name");
 };
+
+
+document.addEventListener('keydown', control);
 
 
 function reset(){
@@ -82,19 +89,21 @@ function runGame(){
                     case 1:
                         alert("You Win! next level");
                         size=size*2;
-                        makeMap(size);
                         $.ajax({
                             type: "get",
                             url: "api.php",
-                            data: {action: "nextLevel"},
+                            data: {action: "nextLevel", size:size},
                             dataType: "json",
                             success: function (response) {
-                                
+                                updateMap(response.map);
                             }
                         });
+                        
                         break;
                     case 2:
                         updateMap(["You Lose!"]);
+                        recorder();
+                        updateScoreBoard();
                         reset();
                         break;
                 }
@@ -107,6 +116,11 @@ function runGame(){
 
 $('#right').click(function(e){
     e.preventDefault;
+    goRight();
+    
+})
+
+function goRight(){
     $.ajax({
         type: "get",
         url: "api.php",
@@ -116,11 +130,18 @@ $('#right').click(function(e){
             
         }
     });
-})
+}
 
 
 $('#left').click(function(e){
     e.preventDefault;
+    
+})
+
+
+
+
+function goLeft(){
     $.ajax({
         type: "get",
         url: "api.php",
@@ -130,9 +151,19 @@ $('#left').click(function(e){
             
         }
     });
-})
+}
 
-
+function recorder(){
+    $.ajax({
+        type: "get",
+        url: "api.php",
+        data: {action: "record", id:userId},
+        dataType: "json",
+        success: function (response) {
+            console.log("Record successed")
+        }
+    });
+}
 
 
 
@@ -191,3 +222,53 @@ function updateScore(score) {
     var scoreDiv = document.getElementById("score");
     scoreDiv.textContent = "Score: " + score;
 }
+
+// update scoreboard
+function updateScoreBoard(){
+    $.ajax({
+        type: "get",
+        url: "api.php",
+        data: {action:"read"},
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            var dataArray = Object.keys(response).map(function(key) {
+                return { user: key, score: response[key] };
+            });
+            dataArray.sort(function(a, b) {
+                return b.score - a.score;
+            });
+            $('#scoreboard').empty();
+            dataArray.forEach(function(item) {
+                var newRow = $('<tr>');
+                var rowUser = $('<td>', {
+                    text: item.user
+                });
+                var rowScore = $('<td>', {
+                    text: item.score
+                });
+                newRow.append(rowUser, rowScore);
+                $('#scoreboard').append(newRow);
+            });
+
+        }
+    });
+}
+
+
+
+function control(event) {
+    switch (event.key) {
+        case 'ArrowLeft':
+            goLeft();
+            break;
+        case 'ArrowRight':
+            goRight();
+            break;
+        default:
+            return;
+    }
+}
+
+
+

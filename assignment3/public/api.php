@@ -52,8 +52,11 @@ switch ($action) {
         $_SESSION["game"]=serialize($game);
         break;
     case "nextLevel":
-        $game->nextLevel();
+        $size=isset($_GET["size"]) ? $_GET["size"] : "";
+        $game->nextLevel($size);
         $_SESSION["game"]=serialize($game);
+        $reponse=["map"=> $game->getMap()];
+        echo json_encode($reponse);
         break;
     case "goRight":
         $game->pGoRight();
@@ -62,6 +65,29 @@ switch ($action) {
     case "goLeft":
         $game->pGoLeft();
         $_SESSION["game"]=serialize($game);
+        break;
+    case "record":
+        $score=$game->getScore();
+        $id=isset($_GET["id"]) ? $_GET["id"] :"";
+        $filePath="data.json";
+        if (file_exists($filePath)) {
+            $jsonData = file_get_contents($filePath);
+            $data = json_decode($jsonData, true);
+        } else {
+            $data = [];
+        }
+
+        $newData=[$id=>$score];
+        $data = array_merge($data, $newData);   
+    
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+        file_put_contents('data.json', $jsonData);
+        // $_SESSION["game"]=serialize($game);
+        break;
+    case "read":
+        $jsonData = file_get_contents('data.json');
+        echo ($jsonData);
+        
         break;
     default:
         echo json_encode(["error"=>"invalid action"]);

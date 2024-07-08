@@ -41,6 +41,21 @@
     <button id="left">Go left</button>
     <button id="right">Go right</button>
 
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>User:</th>
+                    <th>score:</th>
+                </tr>
+            </thead>
+            <tbody id="scoreboard">
+
+            </tbody>
+            
+        </table>
+    </div>
+
     
     <script src="assignemnt3.js"></script>
 </body>
