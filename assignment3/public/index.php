@@ -40,8 +40,10 @@
     <button id="start">Start the game</button>
     <button id="left">Go left</button>
     <button id="right">Go right</button>
-
-    <div>
+    <br>
+    <br>
+    <div class=" scoreBoard">
+        <h3>Score Board:</h3>
         <table>
             <thead>
                 <tr>
