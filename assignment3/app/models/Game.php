@@ -210,5 +210,8 @@ class Game{
         $this->pacman->set_dir(0);
     }
 
+    function pDir(){
+        return $this->pacman->get_dir();
+    }
 
 }

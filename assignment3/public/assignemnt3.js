@@ -2,6 +2,7 @@ var size;
 
 var userId;
 
+var dir=1;
 window.onload = function() {
     reset();
     updateScoreBoard()
@@ -84,7 +85,7 @@ function runGame(){
             if(response.error){
                 alert(response.error);
             }else{
-                
+                dir=response.dir;
                 updateScore(response.score);
                 updateMap(response.map);
                 
@@ -192,10 +193,18 @@ function updateMap(newMap){
 
         switch(cell) {
             case 'C':
-                img.src = 'photos/pacman.jpg';
+                if (dir==1){
+                    img.src = 'photos/pacman.jpg';
+                }else{
+                    img.src = 'photos/pacman2.jpg';
+                }
                 break;
             case 'C.':
-                img.src = 'photos/pacman.jpg';
+                if (dir==1){
+                    img.src = 'photos/pacman.jpg';
+                }else{
+                    img.src = 'photos/pacman2.jpg';
+                }
                 break;
             case '^.':
                 img.src = 'photos/ghost.jpg';
@@ -296,9 +305,6 @@ function control(event) {
             break;
         case 'ArrowRight':
             goRight();
-            break;
-        case "enter":
-            runGame();
             break;
         default:
             return;

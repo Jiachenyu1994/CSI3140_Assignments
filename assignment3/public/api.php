@@ -41,6 +41,7 @@ switch ($action) {
     case "runGame":
         $status=$game->run();
         $map=$game->getMap();
+        $dir=$game->pDir();
         if($map==[]){
             $reponse=["error"=> "Please make map first"];
         }else{
@@ -49,7 +50,8 @@ switch ($action) {
             $reponse = [
                 "status" => $status,
                 "score" => $score,
-                "map" => $map
+                "map" => $map,
+                "dir"=> $dir
             ];
             
         }
@@ -84,7 +86,7 @@ switch ($action) {
                 if ($key == $id) {
                     $found=true;
                     if($value<$score){
-                        $data.[$key]=$score;
+                        $data[$key] = $score;
                     }
                     break;
                 }

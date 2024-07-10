@@ -21,7 +21,7 @@
         </nav>
 
     </header>
-
+    <br>
     <h1>Initialize your 1D Paku Paku Game</h1>
     <br>
     <input type="number" id="size" placeholder="Enter the map size">
