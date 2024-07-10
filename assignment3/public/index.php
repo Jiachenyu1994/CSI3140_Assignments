@@ -43,8 +43,8 @@
     <button id="newPlayer">New Player</button>
     <br>
     <br>
-    <div class=" scoreBoard">
-        <h3>Score Board:</h3>
+    <div class="Top 10:">
+        <h3>Rank:</h3>
         <table>
             <thead>
                 <tr>

@@ -44,6 +44,8 @@ $(document).ready(function(){
 
 
 function makeMap(size){
+    reset();
+    updateScore(0);
     $.ajax({
         type: "get",
         url: "api.php",
@@ -90,7 +92,7 @@ function runGame(){
                     case 0 :
                         console.log("Repeating runGame");
                         console.log(response.map);
-                        setTimeout(runGame,100);
+                        setTimeout(runGame,400);
                         break;
                     case 1:
                         alert("You Win! next level");
