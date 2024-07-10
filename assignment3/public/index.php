@@ -40,6 +40,7 @@
     <button id="start">Start the game</button>
     <button id="left">Go left</button>
     <button id="right">Go right</button>
+    <button id="newPlayer">New Player</button>
     <br>
     <br>
     <div class=" scoreBoard">
@@ -47,6 +48,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Rank:</th>
                     <th>User:</th>
                     <th>score:</th>
                 </tr>

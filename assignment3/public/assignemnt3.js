@@ -8,6 +8,11 @@ window.onload = function() {
     userId = prompt("Please enter your name:", "Your Name");
 };
 
+// button for new player
+$('#newPlayer').click(function(e){
+    location.reload();
+})
+
 
 document.addEventListener('keydown', control);
 
@@ -84,7 +89,8 @@ function runGame(){
                 switch(response.status){
                     case 0 :
                         console.log("Repeating runGame");
-                        setTimeout(runGame,500);
+                        console.log(response.map);
+                        setTimeout(runGame,100);
                         break;
                     case 1:
                         alert("You Win! next level");
@@ -116,8 +122,7 @@ function runGame(){
 
 $('#right').click(function(e){
     e.preventDefault;
-    goRight();
-    
+    goRight();  
 })
 
 function goRight(){
@@ -135,7 +140,7 @@ function goRight(){
 
 $('#left').click(function(e){
     e.preventDefault;
-    
+    goLeft();
 })
 
 
@@ -238,19 +243,44 @@ function updateScoreBoard(){
             dataArray.sort(function(a, b) {
                 return b.score - a.score;
             });
+            // console.log(dataArray);
             $('#scoreboard').empty();
-            dataArray.forEach(function(item) {
-                var newRow = $('<tr>');
-                var rowUser = $('<td>', {
-                    text: item.user
+            if(dataArray.length>=10){
+                for(var i=0;i<10;i++){
+                    var newRow = $('<tr>');
+                    var rank=$('<td>', {
+                        text: i+1
+                    });
+                    var rowUser = $('<td>', {
+                        text: dataArray[i].user
+                    });
+                    var rowScore = $('<td>', {
+                        text: dataArray[i].score
+                    });
+                    newRow.append(rank,rowUser, rowScore);
+                    $('#scoreboard').append(newRow);
+                }
+            }else{
+                var counter=1;
+                dataArray.forEach(function(item) {
+                    
+                    var newRow = $('<tr>');
+                    var rank=$('<td>', {
+                        text: counter
+                    });
+                    var rowUser = $('<td>', {
+                        text: item.user
+                    });
+                    var rowScore = $('<td>', {
+                        text: item.score
+                    });
+                    counter++;
+                    newRow.append(rank,rowUser, rowScore);
+                    $('#scoreboard').append(newRow);
                 });
-                var rowScore = $('<td>', {
-                    text: item.score
-                });
-                newRow.append(rowUser, rowScore);
-                $('#scoreboard').append(newRow);
-            });
-
+    
+            }
+            
         }
     });
 }
@@ -264,6 +294,9 @@ function control(event) {
             break;
         case 'ArrowRight':
             goRight();
+            break;
+        case "enter":
+            runGame();
             break;
         default:
             return;

@@ -29,8 +29,8 @@ switch ($action) {
     // init game map
     case "makeMap":
         $size=isset($_GET["size"]) ? $_GET["size"] : "";
-        if($size<3 || $size==""){
-            echo json_encode(["error"=>"Map size need to be a integer larger than 3"]);
+        if($size<10 || $size==""){
+            echo json_encode(["error"=>"Map size need to be a integer larger than 10"]);
         }else{
             $reponse=["map" => $game->makeMap($size)];
             $_SESSION["game"]=serialize($game);
@@ -40,16 +40,22 @@ switch ($action) {
     // run the game
     case "runGame":
         $status=$game->run();
-        $score=$game->getScore();
         $map=$game->getMap();
-        $reponse = [
-            "status" => $status,
-            "score" => $score,
-            "map" => $map
-        ];
+        if($map==[]){
+            $reponse=["error"=> "Please make map first"];
+        }else{
+            
+            $score=$game->getScore();
+            $reponse = [
+                "status" => $status,
+                "score" => $score,
+                "map" => $map
+            ];
+            
+        }
         echo json_encode($reponse);
-        
         $_SESSION["game"]=serialize($game);
+        
         break;
     case "nextLevel":
         $size=isset($_GET["size"]) ? $_GET["size"] : "";
@@ -73,12 +79,28 @@ switch ($action) {
         if (file_exists($filePath)) {
             $jsonData = file_get_contents($filePath);
             $data = json_decode($jsonData, true);
+            $found=false;
+            foreach ($data as $key => $value) {
+                if ($key == $id) {
+                    $found=true;
+                    if($value<$score){
+                        $data.[$key]=$score;
+                    }
+                    break;
+                }
+            }
+            if(!$found){
+                $newData=[$id=>$score];
+                $data = array_merge($data, $newData); 
+            }
+            print_r($data);
         } else {
             $data = [];
+            $newData=[$id=>$score];
+            $data = array_merge($data, $newData);   
         }
 
-        $newData=[$id=>$score];
-        $data = array_merge($data, $newData);   
+        
     
         $jsonData = json_encode($data, JSON_PRETTY_PRINT);
         file_put_contents('data.json', $jsonData);

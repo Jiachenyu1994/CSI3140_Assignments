@@ -25,7 +25,7 @@ class Pacman{
             }
         }else{
             $this->location--;
-            if ($this->location <=  0) {
+            if ($this->location <  0) {
                 $this->location = $mapSize-1;
             }
         }

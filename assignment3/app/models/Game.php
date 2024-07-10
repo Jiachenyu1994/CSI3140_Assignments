@@ -51,6 +51,9 @@ class Game{
     }
 
     function run(){
+        if($this->map==[]){
+            return 0;
+        }
         $this->updateMap();
         if(!$this->remainPellets()){
             $this->status= 1;
@@ -73,9 +76,10 @@ class Game{
         $this->ghost->move($this->map,$this->pacman->get_power());
         $gNext=$this->ghost->get_Location();
  
-        
-        $this->updatePacmanLocation($pLocation,$pNext);  
         $this->updateGhostLocation($gLocation,$gNext);
+        if($this->status==0){
+            $this->updatePacmanLocation($pLocation,$pNext);  
+        }
     }
 
     function updateGhostLocation($gLocation,$gNext):void{
@@ -85,6 +89,9 @@ class Game{
                 $this->map[$gLocation] = ".";
                 break;
             case "^":
+                $this->map[$gLocation] = " ";
+                break;
+            case " ":
                 $this->map[$gLocation] = " ";
                 break;
             default:
@@ -101,6 +108,42 @@ class Game{
                 break;
             case "@":
                 $this->map[$gNext]= "^@";
+                break;
+            case "C":
+                $power=$this->pacman->get_power();
+                if ($power == false) {
+                    $this->map[$gNext] = "^";
+                    $this->status=2;
+                }
+                if ($power == true) {
+                    $this->score += 20;
+                    $this->map[$gNext] = "C";
+                    
+                }
+                
+                break;
+            case "C.":
+                $power=$this->pacman->get_power();
+                if ($power == false) {
+                    $this->map[$gNext] = "^";
+                    $this->status=2;
+                }
+                if ($power == true) {
+                    $this->score += 20;
+                    $this->map[$gNext] = "C";
+                }
+                break;
+            case "C@":
+                $power=$this->pacman->get_power();
+                if ($power == false) {
+                    $this->map[$gNext] = "^";
+                    $this->status=2;
+                }
+                if ($power == true) {
+                    $this->score += 20;
+                    $this->map[$gNext] = "C";
+                    
+                }
                 break;
             default:
                 $this->map[$gNext] = "^";
@@ -134,7 +177,7 @@ class Game{
                 if ($power == true) {
                     $this->score += 20;
                     $this->map[$pNext] = "C";
-                    $this->status=1;
+                    
                 }
         }
 
@@ -152,7 +195,7 @@ class Game{
     function remainPellets() {
         $result = false;
         for ($i = 0; $i < count($this->map); $i++) {
-            if ($this->map[$i] == "."||$this->map[$i] == "^.") {
+            if ($this->map[$i] == "."||$this->map[$i] == "^."||$this->map[$i] == "C.") {
                 $result = true;
                 break;
             }
