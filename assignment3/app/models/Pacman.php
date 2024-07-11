@@ -12,7 +12,7 @@ class Pacman{
         $this->power = 0;
     }
 
-    public function get_location(){
+    public function get_location():int{
         return $this->location;
     }
    
