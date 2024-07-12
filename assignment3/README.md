@@ -57,7 +57,7 @@ This document provides a explanation of how PHP is used to enhance the 2-D Pacma
 
 ### index.php
 
-- **HTML**: Defines the layout for the game interface including inputs, buttons, and scoreboards.
+- **HTML**: The Layout for the game interface including inputs, buttons, and scoreboards.
 - **JavaScript**: Includes jQuery for handling UI interactions and making API calls to `api.php`.
 
 ## Leaderboard
