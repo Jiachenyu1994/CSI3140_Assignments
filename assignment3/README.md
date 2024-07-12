@@ -84,7 +84,7 @@ This document provides a explanation of how PHP is used to enhance the 2-D Pacma
 
 ### Inital Map Size of the Game Board Created of Size 10
 
-![inital game state](documentation/screenshots/InitialMapSize.png)
+![inital game state](documentation/screenshots/InitialMapSizeCreated.png)
 
 ### You Win Screen State
 
