@@ -96,4 +96,4 @@ This document provides a explanation of how PHP is used to enhance the 2-D Pacma
 
 ### Game Leaederboard of top 10 Scores updated
 
-![inital game state](documentation/screenshots/GameTop10LeaderBoard.png)
+![inital game state](documentation/screenshots/Gametop10LeaderBoard.png)
