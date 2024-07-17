@@ -95,7 +95,7 @@ switch ($action) {
                 $newData=[$id=>$score];
                 $data = array_merge($data, $newData); 
             }
-            print_r($data);
+            // print_r($data);
         } else {
             $data = [];
             $newData=[$id=>$score];
