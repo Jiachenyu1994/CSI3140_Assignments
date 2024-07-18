@@ -31,9 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare('INSERT INTO WaitTimes (patient_id, wait_time) VALUES (:patient_id, :wait_time)');
         $stmt->execute(['patient_id' => $patient_id, 'wait_time' => $wait_time]);
 
+
+        reCalculateWaitTime($pdo,$severity,$wait_time);
         // Commit the transaction
         $pdo->commit();
-
+        
         $response['success'] = true;
         $response['message'] = 'Patient registered successfully';
     } catch (PDOException $e) {
@@ -49,4 +51,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo json_encode($response);
+
+
+
+function reCalculateWaitTime($pdo,$severity,$wait_time){
+    try{
+        // get all patient_id with larger serverity
+        $getIdStmt=$pdo->prepare('SELECT patient_id from Patients
+                            Where severity> :newSeverity' );
+        $getIdStmt->execute(['newSeverity' => $severity]);
+        $patientIdArray=$getIdStmt->fetchAll(PDO::FETCH_ASSOC);
+        // sql for update wait time by adding new wait_time
+        $updateStmt=$pdo->prepare('UPDATE Waittimes SET wait_time = wait_time + :newtime 
+                                    where patient_id= :patient_id');
+
+        if(!empty($patientIdArray)){
+            foreach($patientIdArray as $id){
+                $updateStmt->execute(['newtime' => $wait_time ,'patient_id'=>$id['patient_id']]);
+            }
+        }
+
+        
+    }catch (PDOException $e) {
+        $pdo->rollBack();
+        
+    }catch (Exception $e) {
+        $pdo->rollBack();
+    }
+    
+}
 ?>
