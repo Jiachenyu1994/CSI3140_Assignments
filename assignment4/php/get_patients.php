@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 try {
-    $stmt = $pdo->query('SELECT Patients.name, Patients.severity, WaitTimes.wait_time
+    $stmt = $pdo->query('SELECT *
                          FROM Patients
                          JOIN WaitTimes ON Patients.patient_id = WaitTimes.patient_id');
     $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);

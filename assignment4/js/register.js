@@ -15,6 +15,7 @@ $(document).ready(function() {
                 } else {
                     alert(response.message);
                 }
+                location.reload();
             },
             error: function() {
                 alert('There was an error processing your request.');

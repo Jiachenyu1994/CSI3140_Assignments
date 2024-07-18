@@ -40,6 +40,7 @@ if (!isset($_SESSION['admin'])) {
     <table id="patientTable" border="1">
         <thead>
             <tr>
+                <th>Patient ID</th>
                 <th>Name</th>
                 <th>Severity</th>
                 <th>Wait Time (minutes)</th>
