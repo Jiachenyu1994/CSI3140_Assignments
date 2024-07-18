@@ -15,7 +15,7 @@
     Enter: CREATE DATABASE emergency_waitlist;
 
 3. Connect to “emergency_waitlist” local database
-    \c emergency_waitlist
+    Enter: \c emergency_waitlist
 
 
 - **Step 3**: After connecting to the database enter these SQL queries to create the tables
