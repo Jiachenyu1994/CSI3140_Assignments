@@ -1,10 +1,9 @@
 <?php
 $host = 'localhost';
 $db = 'emergency_waitlist';
-$user = 'postgres';  // or your newly created user
+$user = 'postgres';  // change your assigned postgreSQL username as needed
 
-$password = 'carl';  // ensure this is the correct password
-
+$password = 'carl';  // change you assgined postgreSQL password as needed
 
 try {
     $dsn = "pgsql:host=$host;port=5432;dbname=$db;";
