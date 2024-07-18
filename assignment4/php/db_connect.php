@@ -3,7 +3,7 @@ $host = 'localhost';
 $db = 'emergency_waitlist';
 $user = 'postgres';  // or your newly created user
 
-$password = 'admin';  // ensure this is the correct password
+$password = 'carl';  // ensure this is the correct password
 
 
 try {
