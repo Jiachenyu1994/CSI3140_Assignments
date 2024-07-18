@@ -8,6 +8,11 @@ $(document).ready(function() {
             if (response.success) {
                 var tbody = $('#patientTable tbody');
                 tbody.empty();
+
+                response.patients.sort(function(a, b) {
+                    return a.wait_time - b.wait_time;
+                });
+
                 response.patients.forEach(function(patient) {
                     var row = '<tr>' +
                         '<td>' + patient.patient_id + '</td>' +
