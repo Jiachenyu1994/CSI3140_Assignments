@@ -51,7 +51,7 @@ CREATE TABLE WaitTimes (
 
 Enter: INSERT INTO Admins (username, password) VALUES ('admin1', 'admin1');
 
-- **Step 5**:  Enter repsective PostgreSQL username and password you use on your computer
+- **Step 5**:  Enter repsective PostgreSQL username and password you use on your computer, found in file php/db_connect.php
 
 ![Step 5](documentation/setup5.png)
 
