@@ -4,7 +4,7 @@
 
 - **Step 1**: Make sure PostgreSQL is installed on your system and PATH environment variable location is set to the bin folder of PostgreSQL
 
-![inital game state](documentation/step1.png)
+![Step 1](documentation/step1.png)
 
 - **Step 2**: In terminal or command prompt enter the following commands in order
 
@@ -51,6 +51,10 @@ CREATE TABLE WaitTimes (
 
 Enter: INSERT INTO Admins (username, password) VALUES ('admin1', 'admin1');
 
+- **Step 5**:  Enter repsective PostgreSQL username and password you use on your computer
+
+![Step 5](documentation/setup5.png)
+
 ## Additional Notes:
 
 Make sure you are in the assignment folder directory when running -php -S localhost:4000
@@ -67,29 +71,29 @@ extension=pdo_pgsql
 
 extension=pgsql
 
-![inital game state](documentation/additionalnotes.png)
+![PHP.init file](documentation/additionalnotes.png)
 
 ### Admin perspective
 
 ## Enter your admin username and password from the login screen:
 
-![inital game state](documentation/admin1.png)
+![Admin perspective](documentation/admin1.png)
 
 ## The first part of the admin’s dashboard allows you to register a patient given their name and assigned 3 letter code for the patient to use to log in. It is also required to assign the patient’s wait time and severity level.
 
-![inital game state](documentation/admin2.png)
+![Admin perspective](documentation/admin2.png)
 
 ## The patient’s list shows a list of patients waiting in queue and is dynamically changed based on the initial set wait time and severity level. If a person is registered with a higher severity level than another patient, they will go ahead in queue time and their wait time is then dynamically added on to patients with lower severity injuries.
 
-![inital game state](documentation/admin3.png)
+![Admin perspective](documentation/admin3.png)
 
 ## To treat a patient and remove them from a list, the first button “Treated” is always used. This removes the patient then dynamically changes the wait time of the other patients by subtracting the removed patient’s wait time with their wait time
 
-![inital game state](documentation/admin4.png)
+![Admin perspective](documentation/admin4.png)
 
 ## New Patient list and wait times
 
-![inital game state](documentation/admin5.png)
+![Admin perspective](documentation/admin5.png)
 
 ### Patient perspective
 
@@ -97,9 +101,9 @@ extension=pgsql
 
 You will need to first register a patient through admin dashboard in order to log in
 
-![inital game state](documentation/patient1.png)
+![Patient perspective](documentation/patient1.png)
 
 ## Here you can see the patient’s dashboard that show you your estimated wait time:
 
-![inital game state](documentation/patient2.png)
+![Patient perspective](documentation/patient2.png)
 
