@@ -1,5 +1,9 @@
 # Hotel Triage System Setup + Admin/Patient Perspectives
 
+### NOTE: THIS ASSIGNMENT WAS DONE BASED OFF THE ORIGINAL DESCRIPTION OF A4 RELEASED ON BRIGHTSPACE. WE ALSO RECIEVED PERMISSION BY THE PROF TO DO SO. DB IS CREATED TO REGISTER PATIENTS WITH THREE LETTER CODE
+
+![Permission](documentation/permission.png)
+
 ### How to setup application
 
 - **Step 1**: Make sure PostgreSQL is installed on your system and PATH environment variable location is set to the bin folder of PostgreSQL
